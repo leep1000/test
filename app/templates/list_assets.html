@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Assets</h2>
+<a href="{{ url_for('asset.create_asset') }}">Add Asset</a>
+<table>
+<tr><th>Name</th><th>Type</th><th>Serial</th><th>Location</th><th>Owner</th><th>Actions</th></tr>
+{% for a in assets %}
+<tr>
+<td>{{ a.name }}</td><td>{{ a.asset_type }}</td><td>{{ a.serial_number }}</td><td>{{ a.location }}</td><td>{{ a.owner.username if a.owner else '' }}</td>
+<td>
+ <a href="{{ url_for('asset.edit_asset', asset_id=a.id) }}">Edit</a>
+ {% if current_user.role == 'admin' %}
+   <form method="post" action="{{ url_for('asset.delete_asset', asset_id=a.id) }}" style="display:inline" onsubmit="return confirm('Delete asset?');">
+     <button type="submit">Delete</button>
+   </form>
+ {% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

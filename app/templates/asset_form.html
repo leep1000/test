@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ action }} Asset</h2>
+<form method="post">
+  <label>Name<input type="text" name="name" value="{{ asset.name if asset else '' }}"></label>
+  <label>Type<input type="text" name="asset_type" value="{{ asset.asset_type if asset else '' }}"></label>
+  <label>Serial<input type="text" name="serial_number" value="{{ asset.serial_number if asset else '' }}"></label>
+  <label>Location<input type="text" name="location" value="{{ asset.location if asset else '' }}"></label>
+  <button type="submit">{{ action }}</button>
+</form>
+{% endblock %}
